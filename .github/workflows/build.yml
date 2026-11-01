@@ -18,6 +18,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Accept Android SDK Licenses
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
@@ -25,11 +29,12 @@ jobs:
 
       - name: Build Debug APK
         run: |
-          # Automatically detects if files are in root or a subfolder
+          # Automatically detects if files were placed in root or a subfolder
           if [ ! -f "build.gradle.kts" ] && [ -d "SpeakerCombinerAndroid" ]; then
+            echo "Switching to SpeakerCombinerAndroid subfolder..."
             cd SpeakerCombinerAndroid
           fi
-          gradle assembleDebug --stacktrace
+          gradle assembleDebug --stacktrace --no-daemon
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
