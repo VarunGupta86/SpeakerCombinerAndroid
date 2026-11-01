@@ -175,7 +175,7 @@ class AudioRouterEngine(private val context: Context) {
             AudioDeviceInfo.TYPE_HDMI_EARC -> "HDMI eARC"
             AudioDeviceInfo.TYPE_USB_DEVICE -> "USB Audio"
             AudioDeviceInfo.TYPE_USB_HEADSET -> "USB Headset"
-            AudioDeviceInfo.TYPE_LINE_OUT -> "AUX Line Out"
+            AudioDeviceInfo.TYPE_LINE_ANALOG, AudioDeviceInfo.TYPE_LINE_DIGITAL -> "AUX / Line Out"
             else -> "Audio Output"
         }
     }
